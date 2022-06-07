@@ -1,0 +1,40 @@
+<mat-toolbar class="my-navbar">
+  <button mat-raised-button routerLink="../login" class="btn-link">Iniciar sesión</button>
+</mat-toolbar>
+
+
+<div>
+  <br>
+  <br>
+  <div align=center>
+    <mat-card class="animate__animated animate__backInDown">
+      <h1 class="card-title">NUEVA CUENTA</h1>
+
+      <p>
+        <mat-form-field appearance="legacy" class="card-form-field">
+          <mat-label>Correo</mat-label>
+          <input (keyup.enter)="Registro()" matInput [(ngModel)]="unUsuario.correo" required>
+          <mat-error *ngIf="correo.invalid">{{getErrorMessageCorreo()}}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy" class="card-form-field">
+          <mat-label>Contraseña</mat-label>
+          <input (keyup.enter)="Registro()" matInput type="password"
+            [(ngModel)]="unUsuario.clave" required>
+          <mat-error *ngIf="clave.invalid">{{getErrorMessageClave()}}</mat-error>
+        </mat-form-field>
+      </p>
+
+
+      <button mat-raised-button class="btn-login" (click)="Registro()">Registrarse</button>
+
+      <div id="errorLogin">
+        <h6 id="msjError"></h6>
+      </div>
+
+    </mat-card>
+    <router-outlet></router-outlet>
+  </div>
+</div>

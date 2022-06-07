@@ -1,0 +1,160 @@
+<body>
+    <mat-toolbar class="my-navbar">
+        <div>
+            <b class="navbar-title">Sala de juegos</b>
+            <button mat-raised-button (click)="goHome()" class="btn-link" style="margin: 5px;">Inicio</button>
+        </div>
+        <div>
+            <button mat-raised-button (click)="logout()" class="btn-logout">Salir</button>
+        </div>
+    </mat-toolbar>
+
+
+    <br>
+
+    <div class="center-card">
+        <mat-card class="my-card">            
+            <mat-card-content>
+                <h1 class="title">ENCUESTA</h1>
+                <div class="container" [formGroup]="encuestaForm">
+
+                    <h3 class="subtitle">Datos del jugador</h3>
+                    <div class="datosPersonales">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nombre</mat-label>
+                            <input type="text" matInput formControlName="nombre">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Apellido</mat-label>
+                            <input type="text" matInput formControlName="apellido">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Edad</mat-label>
+                            <input type="number" matInput formControlName="edad">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Telefono</mat-label>
+                            <input type="tel" matInput formControlName="telefono">
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="encuestaForm.get('nombre')?.errors && 
+        (encuestaForm.get('nombre')?.dirty || encuestaForm.get('nombre')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('nombre')?.hasError('required')">
+                            <!-- *El campo nombre es requerido. -->
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('apellido')?.errors && 
+        (encuestaForm.get('apellido')?.dirty || encuestaForm.get('apellido')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('apellido')?.hasError('required')">
+                            <!-- *El campo apellido es requerido. -->
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('edad')?.errors && 
+        (encuestaForm.get('edad')?.dirty || encuestaForm.get('edad')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('edad')?.hasError('required')">
+                            <!-- *El campo edad es requerido. -->
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('edad')?.errors && 
+        (encuestaForm.get('edad')?.dirty || encuestaForm.get('edad')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('edad')?.hasError('min')">
+                            *La edad debe ser mayor a 18 años.
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('edad')?.errors && 
+        (encuestaForm.get('edad')?.dirty || encuestaForm.get('edad')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('edad')?.hasError('max')">
+                            *La edad debe ser menor a 99 años.
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('telefono')?.errors && 
+        (encuestaForm.get('telefono')?.dirty || encuestaForm.get('telefono')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('telefono')?.hasError('required')">
+                            <!-- *El campo telefono es requerido. -->
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('telefono')?.errors && 
+        (encuestaForm.get('telefono')?.dirty || encuestaForm.get('telefono')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('telefono')?.hasError('maxlength')">
+                            *El campo teléfono no puede tener mas de 10 dígitos.
+                        </small>
+                    </div>
+                    <div *ngIf="encuestaForm.get('telefono')?.errors && 
+        (encuestaForm.get('telefono')?.dirty || encuestaForm.get('telefono')?.touched)">
+                        <small class="text-danger" *ngIf="encuestaForm.get('telefono')?.hasError('pattern')">
+                            *El campo teléfono sólo puede contener números.
+                        </small>
+                    </div>
+                    <div>
+                        <br>
+                        <h3 class="subtitle">¿Cómo nos conociste?</h3>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Selecciona uno</mat-label>
+                            <select matNativeControl formControlName="comoNosEncontraste">
+                                <option value="amigos">Por un amigo</option>
+                                <option value="google">Buscador</option>
+                                <option value="publicidad">Publicidad</option>
+                                <option value="otra">Otra</option>
+                            </select>
+                        </mat-form-field>
+                        <div *ngIf="encuestaForm.get('comoNosEncontraste')?.errors && 
+        (encuestaForm.get('comoNosEncontraste')?.dirty || encuestaForm.get('comoNosEncontraste')?.touched)">
+                            <small class="text-danger"
+                                *ngIf="encuestaForm.get('comoNosEncontraste')?.hasError('required')">
+                                *Seleccione una opción.
+                            </small>
+                        </div>
+                    </div>
+                    <div>
+                        <br>
+                        <h3 class="subtitle">¿Cómo puntuarías a la Sala de juegos?</h3>
+                        <mat-slider min="1" max="10" step="1" value="10" aria-label="unit(s)"
+                            formControlName="cuantoGusto"></mat-slider>10
+                        <div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <br>
+                        <h3 class="subtitle">¿Cuál o cuáles fueron tus juegos favoritos?</h3>
+                        <mat-selection-list formControlName="cualesJugaste">
+                            <mat-list-option checkboxPosition="before" value="Ahorcado">Ahorcado</mat-list-option>
+                            <mat-list-option checkboxPosition="before" value="Preguntados">Preguntados</mat-list-option>
+                            <mat-list-option checkboxPosition="before" value="MayorMenor">Mayor o Menor
+                            </mat-list-option>
+                            <mat-list-option checkboxPosition="before" value="Snake">Snake</mat-list-option>
+                        </mat-selection-list>
+                        <div *ngIf="encuestaForm.get('cualesJugaste')?.errors && 
+        (encuestaForm.get('cualesJugaste')?.dirty || encuestaForm.get('cualesJugaste')?.touched)">
+                            <small class="text-danger" *ngIf="encuestaForm.get('cualesJugaste')?.hasError('required')">
+                                *Debe seleccionar una opcion.
+                            </small>
+                        </div>
+                    </div>
+                    <div>
+                        <br>
+                        <h3 class="subtitle">¿Recomendarías la Sala de juegos?</h3>
+                        <mat-radio-group aria-label="Select an option" formControlName="recomendarias">
+                            <mat-radio-button value="1">Si</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                        </mat-radio-group>
+
+
+                        <div *ngIf="encuestaForm.get('recomendarias')?.errors && 
+        (encuestaForm.get('recomendarias')?.dirty || encuestaForm.get('recomendarias')?.touched)">
+                            <small class="text-danger" *ngIf="encuestaForm.get('recomendarias')?.hasError('required')">
+                                *Seleccione una opción.
+                            </small>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn-enviar" type="button" mat-raised-button color="primary"
+                        [disabled]="!encuestaForm.valid" (click)="enviarEncuesta()">Enviar</button>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</body>

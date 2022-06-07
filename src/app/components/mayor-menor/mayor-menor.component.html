@@ -1,0 +1,53 @@
+<body>
+
+    <mat-toolbar class="my-navbar">
+        <div>
+            <b class="navbar-title">Sala de juegos</b>
+            <button mat-raised-button (click)="goHome()" class="btn-link" style="margin: 5px;">Inicio</button>
+        </div>
+        <div>
+            <button mat-raised-button (click)="logout()" class="btn-logout">Salir</button>
+        </div>
+    </mat-toolbar>
+
+    <br>
+
+    <div align='center'>
+        <mat-card class="my-card">
+
+            <h2 class="game-title">¿Mayor o menor?</h2>
+
+            <div class="game" *ngIf="gameStarted">
+                
+                <div class="game-score">
+                    Puntos: {{score}}
+                </div>
+
+                <div class="game-tries">
+                    Intentos restantes: {{this.tries}}
+                </div>
+
+                <div class="col-md-4 text-center game-card">
+                    <div>
+                        <h1>{{this.card}}</h1>
+                    </div>
+                </div>
+    
+                <button mat-raised-button class="btn-juego" (click)="mayorMenor('menor')">Menor</button>
+                <button mat-raised-button class="btn-juego" (click)="mayorMenor('mayor')">Mayor</button>
+
+            </div>
+
+            <div *ngIf="!gameStarted">
+                <button mat-raised-button class="btn-new-game" (click)="newGame()">
+                  Nuevo juego</button>
+            </div>
+
+            
+            <div>
+                <app-chat-mayor-menor></app-chat-mayor-menor>
+            </div>
+
+        </mat-card>
+    </div>    
+</body>

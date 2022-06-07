@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400;800&family=Kanit:wght@800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.my-navbar {
+  background-color: #222831;
+}
+
+.btn-link {
+  background-color: #6C19FF;
+  color: aliceblue;
+  font-weight: bold;
+}
+
+.animate__backInDown {
+  max-width: 400px;
+  background-color:#222831;;
+}
+
+.card-title {
+  padding: 0;
+  font-size: xx-large;
+  font-weight: bold;
+  color: aliceblue;
+  margin-bottom: 40px;
+  font-family: 'Kanit', sans-serif;
+}
+
+.btn-login {
+  width: 200px;
+  background-color: #01B66A;
+  color: aliceblue;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.btn-fast-login {
+  width: 200px;
+  background-color: #00B3D7;
+  color: aliceblue;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.card-form-field {
+  color: #3DD9EB;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #3DD9EB !important;
+ }
+
+ ::ng-deep .mat-form-field-label {
+  color: #3DD9EB !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  background-color: #3DD9EB !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ background-color: #3DD9EB !important;
+}

@@ -1,0 +1,52 @@
+<body>
+  <mat-toolbar class="my-navbar">
+    <div>
+      <b class="navbar-title">Sala de juegos</b>
+      <button mat-raised-button (click)="goHome()" class="btn-link" style="margin: 5px;">Inicio</button>
+    </div>
+    <div>
+      <button mat-raised-button (click)="logout()" class="btn-logout">Salir</button>
+    </div>
+  </mat-toolbar>
+
+  <br>
+
+  <div align='center'>
+    <mat-card class="my-card">
+
+      <h2 class="game-title">Snake</h2>
+
+      <div class="game" *ngIf="gameStarted">
+
+        <div class="game-score" [ngClass]="{'new-best-score': newBestScore}">
+          Puntos: {{score}}
+        </div>
+
+        <br>
+
+        <div class="game-hiscore" [ngClass]="{'new-best-score': newBestScore}">
+          Mejor puntaje: {{best_score}}
+        </div>
+
+        <mat-card-content>
+
+          <br><br>
+          <div class="game-container">
+            <div class="row" *ngFor="let column of board; let i = index;">
+              <div class="column" [ngStyle]="{'background-color': setColors(i, j)}"
+                *ngFor="let row of column; let j = index"></div>
+            </div>
+          </div>
+        </mat-card-content>
+      </div>
+
+      <div *ngIf="!gameStarted">
+        <button mat-raised-button class="btn-new-game" [ngClass]="{'disable-clicks': gameStarted}" (click)="newGame()">
+          Nuevo juego</button>
+      </div>
+
+      <div  *ngIf="!gameStarted">
+        <app-chat-snake></app-chat-snake>
+      </div>
+    </mat-card>
+  </div>
