@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Usuario } from '../../classes/usuario';
-import { UsuarioFireService } from '../../services/usuarios.service';
+import { User } from '../../classes/user';
+import { UserService } from '../../services/user.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { LogService } from 'src/app/services/log.service';
+import { Log } from 'src/app/classes/log';
 
 
 @Component({
@@ -15,36 +17,59 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 export class LoginComponent implements OnInit {
 
-  public unUsuario: Usuario;
-  public loged: Boolean;
+  public user: User;
+  public log: Log;
+  public logged: Boolean;
+  logDate = new Date();
 
-  constructor(public dialog: MatDialog, private servicioUsuario: UsuarioFireService, private router: Router) { 
-    
-    this.unUsuario = new Usuario(); this.loged = false;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.required]);
+
+  constructor(public dialog: MatDialog, private userService: UserService, private logService: LogService, private router: Router) {
+    this.user = new User();
+    this.log = new Log();
+    this.logged = false;
   }
 
-  correo = new FormControl('', [Validators.required, Validators.email]);
-  clave = new FormControl('', [Validators.required, Validators.required]);
+  ngOnInit(): void {
+  }
 
-  getErrorMessageCorreo() {
-    if (this.correo.hasError('required')) {
+  getErrorMessageEmail() {
+    if (this.email.hasError('required')) {
       return 'Ingrese un correo';
     }
 
-    return this.correo.hasError('email') ? 'El correo no es válido' : '';
+    return this.email.hasError('email') ? 'El correo no es válido' : '';
   }
 
-  getErrorMessageClave() {
-    if (this.clave.hasError('required')) {
+  getErrorMessagePassword() {
+    if (this.password.hasError('required')) {
       return 'Ingrese una contraseña';
     }
 
-    return this.clave.hasError('') ? 'La contraseña no es válida' : '';
+    return this.password.hasError('') ? 'La contraseña no es válida' : '';
   }
 
-  public LoginRapido() {
-    this.unUsuario.clave = '123456';
-    this.unUsuario.correo = "invitado@invitado.com";
+  public login() {
+    this.alert('info', 'Verificando credenciales')
+    this.userService.getOne(this.user).valueChanges().subscribe(result => {
+      if (result.length == 1) {
+        this.log.email = this.user.email;
+        this.log.lastLogin = this.logDate;
+        this.logService.create(this.log);
+        localStorage.setItem('token', this.user.email)
+        this.alert('success', 'Bienvenido')
+        this.router.navigateByUrl("home");
+      }
+      else {
+        this.alert('error', 'Usuario no válido')
+      }
+    })
+  }
+
+  public fastLogin() {
+    this.user.email = "invitado@invitado.com";
+    this.user.password = '123456';
   }
 
   alert(icon: SweetAlertIcon, text: string) {
@@ -54,37 +79,28 @@ export class LoginComponent implements OnInit {
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
-      
+
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    
+
     Toast.fire({
       icon: icon,
       title: text
     })
   }
 
+  goTo(place: string) {
+    switch (place) {
+      case "register":
+        this.router.navigateByUrl("register");
+        break;
 
-  public Login() {
-
-    this.alert('info', 'Verificando credenciales')
-    this.servicioUsuario.BuscarUsuario(this.unUsuario).valueChanges().subscribe(result => {
-      if (result.length == 1) {
-
-        localStorage.setItem('token', this.unUsuario.correo)
-        this.alert('success', 'Bienvenido')
-        this.router.navigateByUrl("home");
-        console.log('existe')
-      }
-      else {
-        this.alert('error', 'Usuario no válido')
-      }
-    })
-  }
-
-  ngOnInit(): void {
+      case "about-me":
+        this.router.navigateByUrl("about-me");
+        break;
+    }
   }
 }

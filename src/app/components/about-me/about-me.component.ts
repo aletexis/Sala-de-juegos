@@ -8,24 +8,28 @@ import { Router } from '@angular/router';
 })
 export class AboutMeComponent implements OnInit {
 
-  token:any;
+  token: any;
 
-  constructor( private router: Router) {  this.token = '';}
+  constructor(private router: Router) { this.token = ''; }
 
   ngOnInit(): void {
-
-    
-    this.token = localStorage.getItem('token'); 
-
+    this.token = localStorage.getItem('token');
   }
 
+  goTo(place: string) {
+    switch (place) {
+      case "home":
+        this.router.navigateByUrl("home");
+        break;
 
+      case "login":
+        this.router.navigateByUrl("login");
+        break;
 
-  logout(){
-
-    localStorage.removeItem('token');
-    this.router.navigateByUrl("login");
-
+      case "logout":
+        localStorage.removeItem('token');
+        this.router.navigateByUrl("login");
+        break;
+    }
   }
-
 }

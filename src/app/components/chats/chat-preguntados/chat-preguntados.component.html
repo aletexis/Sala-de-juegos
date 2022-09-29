@@ -1,0 +1,26 @@
+<br>
+<div class="row msg-container frame" #scrollframe>
+    <div class="chat">
+        <div *ngFor="let item of item$ | async">
+
+            <div *ngIf="item.user == token" class="box-blue">
+                <p> {{ item.message }} </p>
+                <strong> {{ item.user }} </strong>&nbsp;
+                <span> {{ item.datetime }}</span>
+            </div>
+
+            <div *ngIf="item.user != token" class="box-green">
+                <p> {{ item.message }} </p>
+                <strong> {{ item.user }} </strong>&nbsp;
+                <span> {{ item.datetime }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-card class="chat-write-box">
+    <mat-icon> chat_bubble_outline</mat-icon>
+    <mat-form-field class="example-full-width">
+        <input (keyup.enter)="sendMessage()" [(ngModel)]="message.message" matInput autocomplete="off">
+    </mat-form-field>
+</mat-card>

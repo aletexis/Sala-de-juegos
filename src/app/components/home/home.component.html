@@ -1,0 +1,79 @@
+<mat-toolbar class="my-navbar">
+    <div>
+        <b class="navbar-title">Sala de juegos</b>
+        <button mat-raised-button (click)="goTo('about-me')" class="btn-link" style="margin: 5px;">Sobre mi</button>
+        <button mat-raised-button (click)="goTo('survey')" class="btn-link" style="margin: 5px;">Encuesta</button>
+    </div>
+    <div>
+        <b class="user-logged">Bienvenido {{token}}</b>
+        <button mat-raised-button (click)="goTo('logout')" class="btn-logout">Salir</button>
+    </div>
+</mat-toolbar>
+
+<div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul id="grid-wrapper">
+        <li class="card hvr-bob">
+            <div class="app-image-wrapper">
+                <img src="../../../assets/icons8-abc-96.png" alt="" class="app-image">
+            </div>
+            <div class="title-bar">
+                <h1 class="card-title">Ahorcado</h1>
+            </div>
+            <div class="caption-bar">
+                <h1 class="card-caption">Adiviná y aprendé nuevas palabras</h1>
+            </div>
+            <div class="card-actions">
+                <button mat-raised-button routerLink="/games/ahorcado" class="btn-play">Jugar</button>
+            </div>
+        </li>
+
+        <li class="card hvr-bob">
+            <div class="app-image-wrapper">
+                <img src="../../../assets/icons8-cards-96.png" alt="" class="app-image">
+            </div>
+            <div class="title-bar">
+                <h1 class="card-title">Mayor o menor</h1>
+            </div>
+            <div class="caption-bar">
+                <h1 class="card-caption"> Poné a prueba tu suerte</h1>
+            </div>
+            <div class="card-actions">
+                <button mat-raised-button routerLink="/games/mayor-menor" class="btn-play">Jugar</button>
+            </div>
+        </li>
+
+        <li class="card hvr-bob">
+            <div class="app-image-wrapper">
+                <img src="../../../assets/icons8-question-96.png" alt="" class="app-image">
+            </div>
+            <div class="title-bar">
+                <h1 class="card-title">Preguntados</h1>
+            </div>
+            <div class="caption-bar">
+                <h1 class="card-caption">¿Cuánto sabés de países?</h1>
+            </div>
+            <div class="card-actions">
+                <button mat-raised-button routerLink="/games/preguntados" class="btn-play">Jugar</button>
+            </div>
+        </li>
+
+        <li class="card hvr-bob">
+            <div class="app-image-wrapper">
+                <img src="../../../assets/icons8-snake-96.png" alt="" class="app-image">
+            </div>
+            <div class="title-bar">
+                <h1 class="card-title">Snake</h1>
+            </div>
+            <div class="caption-bar">
+                <h1 class="card-caption">El clásico juego de la viborita</h1>
+            </div>
+            <div class="card-actions">
+                <button mat-raised-button routerLink="/games/viborita" class="btn-play">Jugar</button>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,10 +1,10 @@
-import { EncuestaComponent } from './components/encuesta/encuesta.component';
+import { SurveyComponent } from './components/survey/survey.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MayorMenorComponent } from './components/mayor-menor/mayor-menor.component';
-import { PreguntadosComponent } from './components/preguntados/preguntados.component';
-import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
+import { MayorMenorComponent } from './components/games/mayor-menor/mayor-menor.component';
+import { PreguntadosComponent } from './components/games/preguntados/preguntados.component';
+import { AhorcadoComponent } from './components/games/ahorcado/ahorcado.component';
 
 
 const routes: Routes = [
@@ -13,27 +13,22 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-
   { path: 'login', loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule) },
-  { path: 'registro', loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule) },
-  { path: 'quiensoy', loadChildren: () => import('./components/about-me/about-me.module').then(m => m.AboutMeModule) },
-  { path: 'home', loadChildren: () => import('./components/principal/principal.module').then(m => m.PrincipalModule) },
-  { path: 'encuesta', component: EncuestaComponent },
-  
+  { path: 'register', loadChildren: () => import('./components/register/register.module').then(m => m.RegisterModule) },
+  { path: 'about-me', loadChildren: () => import('./components/about-me/about-me.module').then(m => m.AboutMeModule) },
+  { path: 'home', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) },
+  { path: 'survey', component: SurveyComponent },
   {
-    path: 'juegos',
-
+    path: 'games',
     children:
       [
         { path: 'ahorcado', component: AhorcadoComponent },
         { path: 'preguntados', component: PreguntadosComponent },
         { path: 'mayor-menor', component: MayorMenorComponent },
-        { path: 'viborita', loadChildren: () => import('./components/viborita/viborita.module').then(m => m.ViboritaModule) },
+        { path: 'viborita', loadChildren: () => import('./components/games/viborita/viborita.module').then(m => m.ViboritaModule) },
       ]
   },
-
   { path: '**', loadChildren: () => import('./components/not-found/not-found.module').then(m => m.NotFoundModule) },
-
 ];
 
 

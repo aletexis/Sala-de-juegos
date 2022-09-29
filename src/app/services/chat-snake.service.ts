@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Message } from '../classes/message';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore/';
-import { Mensaje } from '../classes/mensaje';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 
 
 @Injectable({
@@ -9,18 +8,20 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 })
 export class ChatSnakeService {
 
-  rutaDeLaColeccion = '/juegoPropio';
-  referenciaAlaColeccion: AngularFireList<Mensaje>;
+  pathToCollection = '/chatSnake';
+  collectionReference: AngularFirestoreCollection<Message>;
+  bdReference: AngularFirestore;
 
-  constructor(private bd: AngularFireDatabase) {
-    this.referenciaAlaColeccion = bd.list(this.rutaDeLaColeccion);
+  constructor(private bd: AngularFirestore) {
+    this.bdReference = bd;
+    this.collectionReference = bd.collection(this.pathToCollection);
   }
 
-  Crear(mensaje: Mensaje): any {
-    return this.referenciaAlaColeccion.push(mensaje);
+  create(message: Message): any {
+    return this.collectionReference.add({ ...message });
   }
 
-  ObtenerTodos(): AngularFireList<Mensaje> {
-    return this.referenciaAlaColeccion;
+  getAll() {
+    return this.collectionReference;
   }
 }

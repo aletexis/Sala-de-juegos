@@ -1,9 +1,4 @@
-import { ChatSnakeComponent } from './components/chat-snake/chat-snake.component';
-import { ChatMayorMenorComponent } from './components/chatMayorMenor/chatMayorMenor.component';
-
 import { HttpClientModule } from '@angular/common/http';
-import { ChatPreguntadosComponent } from './components/chatPreguntados/chatPreguntados.component';
-
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,11 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { PreguntadosComponent } from './components/preguntados/preguntados.component';
-import { AhorcadoComponent } from './components/ahorcado/ahorcado.component';
-import { MayorMenorComponent } from './components/mayor-menor/mayor-menor.component';
-import { ChatAhorcadoComponent } from './components/chatAhorcado/chatAhorcado.component';
+import { AhorcadoComponent } from './components/games/ahorcado/ahorcado.component';
+import { MayorMenorComponent } from './components/games/mayor-menor/mayor-menor.component';
+import { PreguntadosComponent } from './components/games/preguntados/preguntados.component';
 
+import { ChatAhorcadoComponent } from './components/chats/chat-ahorcado/chat-ahorcado.component';
+import { ChatMayorMenorComponent } from './components/chats/chat-mayor-menor/chat-mayor-menor.component';
+import { ChatSnakeComponent } from './components/chats/chat-snake/chat-snake.component';
+import { ChatPreguntadosComponent } from './components/chats/chat-preguntados/chat-preguntados.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -42,24 +40,21 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EncuestaComponent } from './components/encuesta/encuesta.component';
-
+import { SurveyComponent } from './components/survey/survey.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatAhorcadoComponent,
-    PreguntadosComponent,
     AhorcadoComponent,
     MayorMenorComponent,
-    ChatPreguntadosComponent,
+    PreguntadosComponent,
+    ChatAhorcadoComponent,
     ChatMayorMenorComponent,
-    EncuestaComponent,
-    
+    ChatPreguntadosComponent,
+    SurveyComponent,
   ],
   imports: [
-
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

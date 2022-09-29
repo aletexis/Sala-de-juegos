@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioFireService } from './../../services/usuarios.service';
-import { Usuario } from '../../classes/usuario'
+import { UserService } from '../../services/user.service';
+import { User } from '../../classes/user'
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { DatePipe } from '@angular/common';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 @Component({
@@ -15,11 +17,67 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 export class RegisterComponent implements OnInit {
 
-  unUsuario: Usuario;
+  public user: User;
+  date = new Date();
+  uid = this.getUid();
+ 
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
+  // confirmedPassword = new FormControl('', [Validators.required]);
 
+  constructor(private userService: UserService, private router: Router, public dialog: MatDialog) {
+    this.user = new User();
+    this.user.id = this.uid;
+    this.user.registrerDate = this.date;
+  }
 
-  constructor(private MiServicio: UsuarioFireService, private router: Router, public dialog: MatDialog) {
-    this.unUsuario = new Usuario();
+  ngOnInit(): void {
+  }
+
+  getUid() {
+    return (performance.now().toString(36)+Math.random().toString(36)).replace(/\./g,"");
+  };
+
+  getErrorMessageEmail() {
+    if (this.email.hasError('required')) {
+      return 'Ingrese un correo';
+    }
+
+    return this.email.hasError('email') ? 'El correo no es válido' : '';
+  }
+
+  getErrorMessagePassword() {
+    if (this.password.hasError('required')) {
+      return 'Ingrese una contraseña';
+    }
+
+    return this.password.hasError('') ? 'La contraseña no es válida' : '';
+  }
+
+  registrer() {
+
+    this.alert('info', 'Verificando credenciales')
+
+    if (!(this.user.password == '' && this.user.email == '')) {
+
+      this.userService.getOne(this.user).valueChanges().subscribe(result => {
+        if (result.length == 0) {
+          this.userService.create(this.user).then(() => {
+            this.alert('success', 'Estás registrado, ¡vamos a jugar!')
+            localStorage.setItem('token', this.user.email);
+            this.router.navigateByUrl("home");
+            console.log("entro al if");
+            return;
+          })
+        }
+        // else  {
+        //   console.log("entro al else");
+        //   console.log('already exist');
+        //   this.alert('info', 'Ya estás registrado, iniciá sesión')
+        //   this.router.navigateByUrl("login");
+        // }
+      })
+    }
   }
 
   alert(icon: SweetAlertIcon, text: string) {
@@ -41,59 +99,4 @@ export class RegisterComponent implements OnInit {
       title: text
     })
   }
-
-
-
-  correo = new FormControl('', [Validators.required, Validators.email]);
-  clave = new FormControl('', [Validators.required]);
-
-  getErrorMessageCorreo() {
-    if (this.correo.hasError('required')) {
-      return 'Ingrese un correo';
-    }
-
-    return this.correo.hasError('email') ? 'El correo no es válido' : '';
-
-  }
-
-  getErrorMessageClave() {
-    if (this.clave.hasError('required')) {
-
-      return 'Ingrese una contraseña';
-    }
-
-    return this.clave.hasError('') ? 'La contraseña no es válida' : '';
-
-  }
-
-  Registro() {
-
-    this.alert('info', 'Verificando credenciales')
-
-    if (!(this.unUsuario.clave == '' && this.unUsuario.correo == ''))
-    {
-      console.log('existe');
-
-      this.MiServicio.BuscarUsuario(this.unUsuario).valueChanges().subscribe(result => {
-        if (result.length == 0) {
-
-          this.MiServicio.Crear(this.unUsuario).then(() => {
-
-            this.alert('success', 'Estás registrado, vamos a jugar!')
-            localStorage.setItem('token', this.unUsuario.correo);
-            this.router.navigateByUrl("home");
-            return;
-          })
-        }
-        else {
-          console.log('existe');
-          //this.dialog.open(DialogElementsExampleDialog); 
-        }
-      })
-    }
-  }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,0 +1,38 @@
+.left {
+  margin-right: 4rem;
+}
+
+.right {
+  justify-content: center;
+  margin-left: 4rem;
+}
+
+.game-tries {
+  background-color: #F55376;
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.playing-card {
+  height: 250px;
+  width: 150px;
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 3px solid black;
+}
+
+.game-btn {
+  background-color: #F5BC00;
+  margin: 20px 10px;
+  color: whitesmoke;
+  font-weight: bold;
+  font-size: 20px;
+}

@@ -1,38 +1,32 @@
 <mat-toolbar class="my-navbar">
-  <button mat-raised-button routerLink="../registro" class="btn-link">Registrarse</button>
-  <button mat-raised-button routerLink="../quiensoy" class="btn-link" style="margin: 10px;">Sobre mi</button>
+  <button mat-raised-button (click)="goTo('register')" class="btn-link">Registrarse</button>
+  <button mat-raised-button (click)="goTo('about-me')" class="btn-link" style="margin: 10px;">Sobre mi</button>
 </mat-toolbar>
 
+<div align=center>
+  <br>
+  <mat-card class="animate__animated animate__fadeInDown">
+    <h1 class="card-title">SALA DE JUEGOS</h1>
+    <p>
+      <mat-form-field appearance="legacy" class="card-form-field">
+        <mat-label>Correo</mat-label>
+        <input (keyup.enter)="login()" matInput [(ngModel)]="user.email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+      </mat-form-field>
+    </p>
 
-<div>
+    <p>
+      <mat-form-field appearance="legacy" class="card-form-field">
+        <mat-label>Contraseña</mat-label>
+        <input (keyup.enter)="login()" matInput type="password" [(ngModel)]="user.password" required>
+        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+      </mat-form-field>
+    </p>
+
+    <button mat-raised-button class="btn-login" (click)="login()">Iniciar sesión</button>
     <br>
-    <div align=center>
-      <mat-card class="animate__animated animate__backInDown">
-        <h1 class="card-title">SALA DE JUEGOS</h1>
+    <button mat-raised-button class="btn-fast-login" (click)="fastLogin()">Inicio rápido</button>
 
-        <p>
-          <mat-form-field appearance="legacy" class="card-form-field">
-            <mat-label>Correo</mat-label>
-            <input (keyup.enter)="Login()" matInput [(ngModel)]="unUsuario.correo" id="inputCorreo"
-              required>
-            <mat-error *ngIf="correo.invalid">{{getErrorMessageCorreo()}}</mat-error>
-          </mat-form-field>
-        </p>
-
-        <p>
-          <mat-form-field appearance="legacy" class="card-form-field">
-            <mat-label>Contraseña</mat-label>
-            <input (keyup.enter)="Login()" matInput type="password"
-              [(ngModel)]="unUsuario.clave" required>
-            <mat-error *ngIf="clave.invalid">{{getErrorMessageClave()}}</mat-error>
-          </mat-form-field>
-        </p>
-
-        <button mat-raised-button class="btn-login" (click)="Login()">Iniciar sesión</button>
-        <br>
-        <button mat-raised-button class="btn-fast-login" (click)="LoginRapido()">Inicio rápido</button>
-
-      </mat-card>
-      <router-outlet></router-outlet>
-    </div>
+  </mat-card>
+  <router-outlet></router-outlet>
 </div>

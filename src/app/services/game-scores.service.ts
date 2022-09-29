@@ -9,32 +9,27 @@ import { Observable } from 'rxjs';
 })
 export class GameScoresService {
 
-
-  rutaDeLaColeccion = "/scores";
-  referenciaAlaColeccion: AngularFirestoreCollection<Score>;
-  referenciaOrdenada: AngularFirestoreCollection<Score>;
+  pathToCollection = "/scores";
+  collectionReference: AngularFirestoreCollection<Score>;
+  sortedReference: AngularFirestoreCollection<Score>;
 
   scores:Observable<Score[]>;
 
   constructor(private bd: AngularFirestore) {
-    this.referenciaAlaColeccion = bd.collection(this.rutaDeLaColeccion);
-    this.referenciaOrdenada = bd.collection<Score>('scores', ref => ref.orderBy('score', 'desc'));
-
-
-    this.scores = this.referenciaAlaColeccion .valueChanges(this.rutaDeLaColeccion)
-
+    this.collectionReference = bd.collection(this.pathToCollection);
+    this.sortedReference = bd.collection<Score>('scores', ref => ref.orderBy('score', 'desc'));
+    this.scores = this.collectionReference .valueChanges(this.pathToCollection)
   }
 
+  // getO(){
+  //   return this.scores;
+  // }
 
-  getO(){
-    return this.scores;
+  create(score: Score): any {
+    return this.collectionReference.add({ ...score });
   }
 
-  AgregarScore(score: Score): any {
-    return this.referenciaAlaColeccion.add({ ...score });
-  }
-
-  GetAll(): AngularFirestoreCollection<Score> {
-    return this.referenciaOrdenada;
-  }
+  // getAll(): AngularFirestoreCollection<Score> {
+  //   return this.sortedReference;
+  // }
 }
