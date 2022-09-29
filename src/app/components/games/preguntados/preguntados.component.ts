@@ -77,16 +77,16 @@ export class PreguntadosComponent {
 
       for (let i = 0; i < 4; i++) {
         var randomNumberCountry = Math.floor(Math.random() * (249 - 0) + 0);
-        // var randomPosition = Math.floor(Math.random() * 4);
-
-        if (i == 0) {
-          // console.log("randooooom", randomPosition);
-          this.chosenCountry = this.allCountriesApi[randomNumberCountry];
-        }
 
         this.countryOptions.push(this.allCountriesApi[randomNumberCountry]);
       }
+      this.setCorrectAnswer();
     })
+  }
+
+  setCorrectAnswer() {
+    var randomPosition = Math.floor(Math.random() * 4);
+    this.chosenCountry = this.countryOptions[randomPosition];
   }
 
   chooseCountry(country: any) {
