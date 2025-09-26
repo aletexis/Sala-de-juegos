@@ -1,0 +1,16 @@
+<ul id="grid-wrapper">
+	<li class="card hvr-bob app-bg p-4" *ngFor="let game of games">
+		<div class="app-image-wrapper app-bg">
+			<img [src]="game.icon" [alt]="game.title" class="app-img">
+		</div>
+
+		<h1 class="card-title">{{ game.title }}</h1>
+		<h2 class="card-caption">{{ game.caption }}</h2>
+
+		<div class="my-2">
+			<button mat-raised-button [routerLink]="game.route" class="app-btn app-btn--green">
+				Jugar
+			</button>
+		</div>
+	</li>
+</ul>

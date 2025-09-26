@@ -1,0 +1,20 @@
+<app-loader *ngIf="loadingService.loading$ | async"></app-loader>
+
+<div #gameContainer
+	class="game-container d-flex flex-column align-items-center justify-content-center app-bg animate__animated animate__slideInRight animate__faster"
+	*ngIf="!(loadingService.loading$ | async)">
+
+	<div class="game-question fw-bold" *ngIf="chosenCountry">
+		<h3>Adiviná el país al que pertenece esta bandera</h3>
+	</div>
+
+	<div>
+		<img class="game-img" *ngIf="chosenCountry" [src]="chosenCountry.flags.png" [alt]="chosenCountry.flags.alt" />
+	</div>
+
+	<div *ngFor="let country of countryOptions">
+		<button type="button" class="app-btn app-btn--green fs-4 my-2" (click)="chooseCountry(country)">
+			{{ country.nombreEsp }}
+		</button>
+	</div>
+</div>

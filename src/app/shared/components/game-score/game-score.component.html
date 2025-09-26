@@ -1,0 +1,31 @@
+<app-loader *ngIf="loadingService.loading$ | async"></app-loader>
+
+<div class="score-table-wrapper app-bg-light p-3 rounded text-light"
+	*ngIf="!(loadingService.loading$ | async) && scores.length > 0">
+	<h4 class="text-center text-light mb-3">🏆 Mejores puntajes</h4>
+
+	<div class="score-table-container">
+		<table class="score-table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Jugador</th>
+					<th>Puntaje</th>
+					<th>Fecha</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let score of scores; let i = index">
+					<td>{{ i + 1 }}</td>
+					<td>{{ score.name }}</td>
+					<td>{{ score.score }}</td>
+					<td>{{ score.date }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div *ngIf="!(loadingService.loading$ | async) && scores.length === 0" class="no-scores m-5 p-5">
+		<h5>Todavía no hay puntajes registrados</h5>
+	</div>
+</div>

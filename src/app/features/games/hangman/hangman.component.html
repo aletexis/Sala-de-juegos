@@ -1,0 +1,14 @@
+<div class="game-container d-flex flex-column align-items-center justify-content-center">
+
+	<img class="game-img mb-4" src="hangman/hangman_{{pictureNumber}}.png">
+
+	<div class="game-dashes-container mb-4">
+		<span class="game-dash" *ngFor="let dash of dashes">{{ dash }}</span>
+	</div>
+
+	<div class="game-letters-container d-flex flex-wrap justify-content-center p-1">
+		<button class="app-btn app-btn--blue" *ngFor="let letter of letters" (click)="selectLetter(letter)">
+			{{ letter }}
+		</button>
+	</div>
+</div>

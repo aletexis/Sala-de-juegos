@@ -1,0 +1,50 @@
+<div class="container app-bg p-4 rounded animate__animated animate__slideInUp animate__faster">
+	<h1 class="text-center text-light fw-bold mb-4">{{ currentGameTitle }}</h1>
+
+	<div class="game-card" [class.game-started]="gameStarted">
+
+		<ng-container *ngIf="!gameStarted && !gameOver">
+			<div class="lobby-content d-flex flex-column justify-content-center align-items-center">
+				<div class="lobby-top">
+					<button class="app-btn app-btn--green fs-4 mb-4" (click)="startGame()">Nuevo juego</button>
+				</div>
+				<div class="lobby-bottom p-2">
+					<app-game-score [game]="currentGameId"></app-game-score>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="gameStarted || gameOver">
+			<div class="game-content">
+
+				<div class="game-main rounded p-3 d-flex flex-column">
+					<ng-container *ngIf="!gameOver; else gameOverTpl">
+						<router-outlet></router-outlet>
+					</ng-container>
+					<ng-template #gameOverTpl>
+						<div class="d-flex flex-column justify-content-center align-items-center text-center flex-grow-1">
+							<h2 class="text-light mb-3">¡Juego terminado!</h2>
+							<p class="fs-4 text-white">Tu puntaje final: <strong>{{ finalScore }}</strong></p>
+							<div class="d-flex gap-3 mt-4">
+								<button class="app-btn app-btn--green" (click)="startGame()">Jugar otra vez</button>
+								<button class="app-btn app-btn--red" (click)="goLobby()">Volver al lobby</button>
+							</div>
+						</div>
+					</ng-template>
+				</div>
+
+				<div class="game-sidebar">
+					<div class="board-container d-flex flex-column justify-content-center align-items-center rounded">
+						<ng-container *ngIf="!gameOver">
+							<app-game-board [game]=" currentGameId"></app-game-board>
+						</ng-container>
+					</div>
+					<div class="chat-container d-flex flex-column rounded">
+						<app-chat [game]="currentGameId"></app-chat>
+					</div>
+				</div>
+			</div>
+		</ng-container>
+
+	</div>
+</div>

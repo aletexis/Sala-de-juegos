@@ -1,0 +1,70 @@
+.card {
+	max-width: 500px;
+	width: 90%;
+	padding: 3rem 2rem;
+	border-radius: 1rem;
+	text-align: center;
+	color: #F5F5F5;
+
+	h1 {
+		font-size: 12rem;
+		letter-spacing: 0.1em;
+		margin: 0;
+		text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			display: inline-block;
+			animation: spooky 2s alternate infinite linear;
+
+			img {
+				height: 8rem;
+				width: auto;
+				max-height: 35%;
+				display: block;
+				margin: 0 0.5rem;
+				text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+			}
+		}
+
+		@media (max-width: 768px) {
+			font-size: 8rem;
+
+			span img {
+				height: 3rem;
+				max-height: 30%;
+			}
+		}
+
+		@media (max-width: 480px) {
+			font-size: 6rem;
+
+			span img {
+				height: 2.5rem;
+				max-height: 28%;
+			}
+		}
+	}
+
+	h2 {
+		font-size: 1.5rem;
+		margin: 1.5rem 0;
+		color: #ccc;
+	}
+
+	button {
+		margin-top: 1rem;
+	}
+}
+
+@keyframes spooky {
+	from {
+		transform: translateY(.15em) scaleY(.95);
+	}
+
+	to {
+		transform: translateY(-.15em) scaleY(1.05);
+	}
+}

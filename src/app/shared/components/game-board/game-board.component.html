@@ -1,0 +1,19 @@
+<div class="button-row" *ngIf="game !== 'viborita'; else onlyScore">
+	<div class="app-btn app-btn--blue" [style.--digits]="score.toString().length" title="{{ score }}">
+		<span class="label">Puntos</span>
+		<span class="value">{{ score }}</span>
+	</div>
+	<div class="app-btn app-btn--red" [style.--digits]="tries.toString().length" title="{{ tries }}">
+		<span class="label">Intentos</span>
+		<span class="value">{{ tries }}</span>
+	</div>
+</div>
+
+<ng-template #onlyScore>
+	<div class="button-row">
+		<div class="app-btn app-btn--blue" [style.--digits]="score.toString().length" title="{{ score }}">
+			<span class="label">Puntos</span>
+			<span class="value">{{ score }}</span>
+		</div>
+	</div>
+</ng-template>

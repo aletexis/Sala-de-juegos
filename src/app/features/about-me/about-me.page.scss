@@ -1,0 +1,47 @@
+.about-card {
+	max-width: 600px;
+	color: whitesmoke;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+	&:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+	}
+}
+
+.profile-img {
+	width: 180px;
+	height: 180px;
+	object-fit: cover;
+	border: 3px solid #6C19FF;
+	margin-bottom: 1rem;
+}
+
+.about-title {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+	color: #f5bc00;
+}
+
+.about-subtitle {
+	font-size: 1.5rem;
+	margin: 1.5rem 0 1rem;
+	color: #01A25F;
+}
+
+.about-text {
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+.github-icon {
+	font-size: 32px;
+	margin: 1rem;
+	color: whitesmoke;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: #00AACC;
+	}
+}

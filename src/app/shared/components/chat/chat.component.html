@@ -1,0 +1,33 @@
+<div class="chat-container app-bg-light d-flex flex-column p-3 rounded">
+
+	<h5 class="mb-2">Chat</h5>
+
+	<div class="messages flex-grow-1 overflow-auto p-2">
+		<ng-container *ngIf="messages$ | async as messages; else noMessages">
+			<div *ngFor="let msg of messages"
+				[ngClass]="{'msg-out': msg.user === userEmail, 'msg-in': msg.user !== userEmail}"
+				class="chat-bubble mb-2 p-2 position-relative">
+				<p class="m-0 mb-1">{{ msg.message }}</p>
+				<small>
+					<ng-container *ngIf="msg.user === userEmail; else otherUser">
+						{{ msg.datetime | date:'HH:mm' }}
+					</ng-container>
+					<ng-template #otherUser>
+						<strong>{{ msg.user }}</strong> - {{ msg.datetime | date:'HH:mm' }}
+					</ng-template>
+				</small>
+			</div>
+		</ng-container>
+		<ng-template #noMessages>
+			<p class="text-center">Todavía no hay mensajes</p>
+		</ng-template>
+	</div>
+
+	<div class="chat-input d-flex mt-2 align-items-center">
+		<input type="text" class="form-control me-2" placeholder="Escribí un mensaje..." [(ngModel)]="newMessage"
+			(keyup.enter)="sendMessage()">
+		<button class="app-btn app-btn--green position-relative" [disabled]="!newMessage.trim()" (click)="sendMessage()">
+			<i class="fa-solid fa-paper-plane fa-lg fly-icon"></i>
+		</button>
+	</div>
+</div>

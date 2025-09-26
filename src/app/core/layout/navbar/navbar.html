@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg app-bg">
+	<div class="container-fluid">
+
+		<div class="d-flex align-items-center">
+			<!-- Sala de Juegos visible si logueada o en registro/sobre-mi -->
+			<span class="navbar__title m-2" *ngIf="isLoggedIn() || ['/registro', '/sobre-mi'].includes(currentRoute)">
+				Sala de Juegos
+			</span>
+
+			<!-- No logueado en inicio-sesion -->
+			<button *ngIf="!isLoggedIn() && currentRoute === '/inicio-sesion'" class="app-btn app-btn--purple m-2"
+				(click)="goTo('registro')">Registrarse</button>
+
+			<!-- Logueado en inicio -->
+			<ng-container *ngIf="isLoggedIn() && currentRoute === '/inicio'">
+				<button class="app-btn app-btn--purple m-2" (click)="goTo('sobre-mi')">Sobre mí</button>
+				<button class="app-btn app-btn--purple m-2" (click)="goTo('encuesta')">Encuesta</button>
+			</ng-container>
+
+			<!-- Logueado en otras rutas -->
+			<button *ngIf="isLoggedIn() && currentRoute !== '/inicio'" class="app-btn app-btn--purple m-2"
+				(click)="goTo('inicio')">Inicio</button>
+		</div>
+
+
+
+		<div class="ms-auto d-flex align-items-center">
+			<!-- No logueado en registro o sobre-mi -->
+			<button *ngIf="!isLoggedIn() && ['/registro', '/sobre-mi'].includes(currentRoute)"
+				class="app-btn app-btn--purple m-2" (click)="goTo('inicio-sesion')">Iniciar sesión</button>
+
+			<!-- No logueado en inicio-sesion -->
+			<button *ngIf="!isLoggedIn() && currentRoute === '/inicio-sesion'" class="app-btn app-btn--purple m-2"
+				(click)="goTo('sobre-mi')">Sobre mí</button>
+
+			<!-- Bienvenido y logout si logueado -->
+			<span *ngIf="isLoggedIn() && currentRoute === '/inicio' && (session.userEmail$ | async) as email"
+				class="fw-bold m-2">
+				Bienvenido/a {{ email }}
+			</span>
+
+			<button *ngIf="isLoggedIn()" class="app-btn app-btn--red m-2" (click)="logout()">Salir</button>
+		</div>
+	</div>
+</nav>

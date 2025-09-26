@@ -1,0 +1,56 @@
+* {
+	color: whitesmoke;
+}
+
+.card {
+	width: 100%;
+	max-width: 500px;
+}
+
+.card-title {
+	color: whitesmoke;
+	font-family: 'Kanit', sans-serif;
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.card-label {
+	color: #3DD9EB;
+	font-weight: 500;
+	margin-bottom: 6px;
+	display: block;
+}
+
+.card-input {
+	width: 100%;
+	padding: 10px 12px;
+	border: 2px solid #3DD9EB;
+	border-radius: 6px;
+	font-size: 1rem;
+	transition: all 0.2s ease;
+
+	&:focus {
+		border-color: #6C19FF;
+		outline: none;
+	}
+}
+
+.card-error {
+	min-height: 1.5rem;
+	margin-top: 6px;
+	font-size: 1rem;
+	color: #ff4d4d;
+
+	& span {
+		display: inline-block;
+		color: #ff4d4d;
+	}
+}
+
+input[type="radio"] {
+	accent-color: #d4af37;
+}
+
+input[type="checkbox"] {
+	accent-color: #6C19FF;
+}

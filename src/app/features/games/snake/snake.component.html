@@ -1,0 +1,6 @@
+<div class="game-container app-bg">
+	<div class="row" *ngFor="let column of board; let i = index;">
+		<div class="column" *ngFor="let row of column; let j = index" [ngStyle]="{ 'background-color': setColors(i, j) }">
+		</div>
+	</div>
+</div>
