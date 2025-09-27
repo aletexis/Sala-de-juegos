@@ -75,7 +75,11 @@ export class HigherLowerComponent {
   }
 
   private randomCard(): number {
-    return this.cardNumber[Math.floor(Math.random() * this.cardNumber.length)];
+    let card;
+    do {
+      card = this.cardNumber[Math.floor(Math.random() * this.cardNumber.length)];
+    } while (card === this.card);
+    return card;
   }
 
   play(option: 'mayor' | 'menor') {
