@@ -72,3 +72,8 @@
 	height: clamp(30px, 5vw, 40px);
 	font-size: clamp(12px, 2vw, 15px);
 }
+
+.letter-used {
+	opacity: 0.4;
+	pointer-events: none;
+}

@@ -27,6 +27,7 @@ export class HangmanComponent {
   wordToGuess = '';
   dashes: string[] = [];
   letters = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
+  usedLetters: string[] = [];
 
   constructor(
     private alertService: AlertService,
@@ -57,6 +58,7 @@ export class HangmanComponent {
     this.score = 0;
     this.tries = 5;
     this.pictureNumber = 0;
+    this.usedLetters = [];
     this.gameService.setScore(this.score);
     this.gameService.setTries(this.tries);
 
@@ -85,6 +87,7 @@ export class HangmanComponent {
     this.pictureNumber = 0;
     this.wordToGuess = '';
     this.dashes = [];
+    this.usedLetters = [];
     this.remainingWords = [];
     this.gameService.setScore(this.score);
     this.gameService.setTries(this.tries);
@@ -101,10 +104,13 @@ export class HangmanComponent {
       Math.floor(Math.random() * this.remainingWords.length), 1)[0];
 
     this.dashes = Array(this.wordToGuess.length).fill('_');
+    this.usedLetters = [];
   }
 
   selectLetter(letter: string) {
-    if (!this.wordToGuess) return;
+    if (this.usedLetters.includes(letter)) return;
+
+    this.usedLetters.push(letter);
 
     let hit = false;
 

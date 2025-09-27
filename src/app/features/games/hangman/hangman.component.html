@@ -7,7 +7,8 @@
 	</div>
 
 	<div class="game-letters-container d-flex flex-wrap justify-content-center p-1">
-		<button class="app-btn app-btn--blue" *ngFor="let letter of letters" (click)="selectLetter(letter)">
+		<button class="app-btn app-btn--blue" *ngFor="let letter of letters" (click)="selectLetter(letter)"
+			[ngClass]="{ 'letter-used': usedLetters.includes(letter) }">
 			{{ letter }}
 		</button>
 	</div>
