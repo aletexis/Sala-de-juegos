@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { HomePage } from './features/home/home.page';
 import { LoginPage } from './features/login/login.page';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
 	{ path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
 	{ path: 'inicio-sesion', component: LoginPage },
-	{ path: 'inicio', component: HomePage },
+	{ path: 'inicio', component: HomePage, canActivate: [authGuard] },
 	{
 		path: 'registro',
 		loadComponent: () =>
@@ -19,12 +20,14 @@ export const routes: Routes = [
 	{
 		path: 'encuesta',
 		loadComponent: () =>
-			import('./features/survey/survey.component').then(m => m.SurveyComponent)
+			import('./features/survey/survey.component').then(m => m.SurveyComponent),
+		canActivate: [authGuard]
 	},
 	{
 		path: 'juegos',
 		loadChildren: () =>
-			import('./features/games/games-module').then(m => m.GamesModule)
+			import('./features/games/games-module').then(m => m.GamesModule),
+		canActivate: [authGuard]
 	},
 	{
 		path: '**',
